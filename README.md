@@ -11,7 +11,7 @@ Alex sent 3 gifs with date:
   
   
 Then he tried to send one more gif. He got the result: 4th gif was deleted, message has been shown: 
-"Gifs limit exceeded! Next gif available at Fri Jun 07 13:00:00 EEST 2019".
+"Gifs limit exceeded! Next gif available in 5min 17sec".
 
 
 ## Expected system variables
