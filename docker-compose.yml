@@ -1,0 +1,14 @@
+version: '3'
+services:
+  api:
+    build: .
+    container_name: anti-alex-bot
+    image: anti-alex-bot
+    ports:
+      - "8080:8080"
+    environment:
+      ALEX_ID: ${ALEX_ID}
+      MAX_GIF_COUNT: ${MAX_GIF_COUNT}
+      TIME_LIMIT: ${TIME_LIMIT}
+      BOT_NAME: ${BOT_NAME}
+      BOT_TOKEN: ${BOT_TOKEN}
