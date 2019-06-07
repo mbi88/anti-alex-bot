@@ -1,5 +1,6 @@
 # anti-alex-bot
 Do you have a gif-spammer in your telegram chat? Is his name Alex? Let this bot kill that gif garbage!
+
 Bot deletes gifs sent by Alex. Alex is allowed to send MAX_GIF_COUNT within TIME_LIMIT. Every extra gif will be deleted.
   
   
