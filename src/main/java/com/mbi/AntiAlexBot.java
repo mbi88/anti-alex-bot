@@ -25,6 +25,7 @@ import static com.mbi.Application.*;
 public class AntiAlexBot extends TelegramBot {
 
     private List<Message> shownGifList = new ArrayList<>();
+    private List<Message> nextGifMessages = new ArrayList<>();
 
     @Override
     public void onUpdateReceived(final Update update) {
@@ -32,6 +33,7 @@ public class AntiAlexBot extends TelegramBot {
 
         if (isAlex(telegramMessage.getFrom())) {
             deleteGif(telegramMessage);
+            deleteOutdatedNextGifMessage();
         }
     }
 
@@ -55,9 +57,18 @@ public class AntiAlexBot extends TelegramBot {
         if (allowedToShow(message)) {
             shownGifList.add(message);
         } else {
-            sendTelegramMessage(message, String.format("Gifs limit exceeded! Next gif available in %s",
-                    getNextGifTime(message)));
+            nextGifMessages.add(sendTelegramMessage(message,
+                    String.format("Gifs limit exceeded! Next gif available in %s", getNextGifTime(message))));
             deleteTelegramMessage(message);
+        }
+    }
+
+    /**
+     * Deletes repeating messages with next available gif time.
+     */
+    private void deleteOutdatedNextGifMessage() {
+        if (nextGifMessages.size() > 1) {
+            deleteTelegramMessage(nextGifMessages.get(nextGifMessages.size() - 2));
         }
     }
 

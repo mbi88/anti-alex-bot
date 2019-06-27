@@ -34,14 +34,18 @@ public abstract class TelegramBot extends TelegramLongPollingBot {
         }
     }
 
-    protected synchronized void sendTelegramMessage(final Message msg, final String text) {
+    protected synchronized Message sendTelegramMessage(final Message msg, final String text) {
         final var message = new SendMessage();
         message.setChatId(msg.getChatId());
         message.setText(text);
+
+        Message response = null;
         try {
-            execute(message);
+            response = execute(message);
         } catch (TelegramApiException e) {
             log.error(e.getMessage());
         }
+
+        return response;
     }
 }
