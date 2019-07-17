@@ -34,7 +34,6 @@ public class AntiAlexBot extends TelegramBot {
         System.out.println(telegramMessage.getFrom().toString());
 
         if (isAlex(telegramMessage.getFrom())) {
-            telegramMessage.getDocument().getMimeType();
             System.out.println(telegramMessage.getDocument().toString());
             deleteGif(telegramMessage);
             deleteOutdatedNextGifMessage();
