@@ -1,11 +1,8 @@
 package com.mbi;
 
-import org.telegram.telegrambots.api.methods.groupadministration.GetChatAdministrators;
-import org.telegram.telegrambots.api.methods.groupadministration.GetChatMemberCount;
 import org.telegram.telegrambots.api.objects.Message;
 import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.api.objects.User;
-import org.telegram.telegrambots.exceptions.TelegramApiException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,31 +30,12 @@ public class AntiAlexBot extends TelegramBot {
     @Override
     public void onUpdateReceived(final Update update) {
         final var telegramMessage = update.getMessage();
-        GetChatMemberCount chatMemberCount = new GetChatMemberCount();
-        chatMemberCount.setChatId(update.getMessage().getChatId());
-
-        try {
-            System.out.println(execute(chatMemberCount).toString());
-        } catch (TelegramApiException e) {
-            e.printStackTrace();
-        }
-
-        GetChatAdministrators chatAdministrators = new GetChatAdministrators();
-        chatAdministrators.setChatId(update.getMessage().getChatId());
-
-        try {
-            System.out.println(execute(chatAdministrators).toString());
-        } catch (TelegramApiException e) {
-            e.printStackTrace();
-        }
-
         // DEBUG
         System.out.println(telegramMessage.getFrom().toString());
-        if (isGif(telegramMessage)) {
-            getUserPhotos(telegramMessage.getFrom().getId());
-        }
 
         if (isAlex(telegramMessage.getFrom())) {
+            telegramMessage.getDocument().getMimeType();
+            System.out.println(telegramMessage.getDocument().toString());
             deleteGif(telegramMessage);
             deleteOutdatedNextGifMessage();
         }
