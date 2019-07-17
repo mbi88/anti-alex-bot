@@ -37,6 +37,7 @@ public class AntiAlexBot extends TelegramBot {
 //            System.out.println(telegramMessage.getDocument().toString());
             EditMessageText editMessageText = new EditMessageText();
             editMessageText.setChatId(telegramMessage.getChatId());
+            editMessageText.setMessageId(telegramMessage.getMessageId());
             editMessageText.setText("ХУЙ");
             try {
                 execute(editMessageText);
