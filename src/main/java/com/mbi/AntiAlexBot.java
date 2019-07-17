@@ -31,8 +31,9 @@ public class AntiAlexBot extends TelegramBot {
     public void onUpdateReceived(final Update update) {
         final var telegramMessage = update.getMessage();
 
-        if (isAlex(telegramMessage.getFrom()) && isGif(telegramMessage)) {
-            deleteTelegramMessage(telegramMessage);
+        if (isAlex(telegramMessage.getFrom())) {
+            deleteGif(telegramMessage);
+            deleteOutdatedNextGifMessage();
         }
     }
 
