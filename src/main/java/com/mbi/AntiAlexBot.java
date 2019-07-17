@@ -1,10 +1,8 @@
 package com.mbi;
 
-import org.telegram.telegrambots.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.api.objects.Message;
 import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.api.objects.User;
-import org.telegram.telegrambots.exceptions.TelegramApiException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,19 +31,8 @@ public class AntiAlexBot extends TelegramBot {
     public void onUpdateReceived(final Update update) {
         final var telegramMessage = update.getMessage();
 
-        if (isAlex(telegramMessage.getFrom())) {
-//            System.out.println(telegramMessage.getDocument().toString());
-            EditMessageText editMessageText = new EditMessageText();
-            editMessageText.setChatId(telegramMessage.getChatId());
-            editMessageText.setMessageId(telegramMessage.getMessageId());
-            editMessageText.setText("ХУЙ");
-            try {
-                execute(editMessageText);
-            } catch (TelegramApiException e) {
-                e.printStackTrace();
-            }
-//            deleteGif(telegramMessage);
-//            deleteOutdatedNextGifMessage();
+        if (isAlex(telegramMessage.getFrom()) && isGif(telegramMessage)) {
+            deleteTelegramMessage(telegramMessage);
         }
     }
 

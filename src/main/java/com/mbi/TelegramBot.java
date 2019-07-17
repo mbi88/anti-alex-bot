@@ -2,7 +2,6 @@ package com.mbi;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.telegram.telegrambots.api.methods.GetUserProfilePhotos;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.methods.updatingmessages.DeleteMessage;
 import org.telegram.telegrambots.api.objects.Message;
@@ -30,20 +29,6 @@ public abstract class TelegramBot extends TelegramLongPollingBot {
         var message = new DeleteMessage(msg.getChatId(), msg.getMessageId());
         try {
             execute(message);
-        } catch (TelegramApiException e) {
-            log.error(e.getMessage());
-        }
-    }
-
-    protected synchronized void getUserPhotos(final int id) {
-        var message = new GetUserProfilePhotos();
-        message.setUserId(id);
-        message.setOffset(1);
-        try {
-            var list = execute(message).getPhotos();
-            for (var l : list) {
-                System.out.println(l.toString());
-            }
         } catch (TelegramApiException e) {
             log.error(e.getMessage());
         }
