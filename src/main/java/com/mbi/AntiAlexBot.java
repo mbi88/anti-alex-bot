@@ -1,8 +1,9 @@
 package com.mbi;
 
-import org.telegram.telegrambots.api.objects.Message;
-import org.telegram.telegrambots.api.objects.Update;
-import org.telegram.telegrambots.api.objects.User;
+
+import org.telegram.telegrambots.meta.api.objects.Message;
+import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,8 +25,12 @@ import static com.mbi.Application.*;
  */
 public class AntiAlexBot extends TelegramBot {
 
-    private List<Message> shownGifList = new ArrayList<>();
-    private List<Message> nextGifMessages = new ArrayList<>();
+    private final List<Message> shownGifList = new ArrayList<>();
+    private final List<Message> nextGifMessages = new ArrayList<>();
+
+    public AntiAlexBot(final String botToken) {
+        super(botToken);
+    }
 
     @Override
     public void onUpdateReceived(final Update update) {
@@ -89,7 +94,7 @@ public class AntiAlexBot extends TelegramBot {
      * @return if user is Alex.
      */
     private boolean isAlex(final User user) {
-        return user.getId().equals(Integer.parseInt(ALEX_ID));
+        return user.getId().equals(Long.parseLong(ALEX_ID));
     }
 
     /**

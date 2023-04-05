@@ -2,9 +2,9 @@ package com.mbi;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.telegram.telegrambots.ApiContextInitializer;
-import org.telegram.telegrambots.TelegramBotsApi;
-import org.telegram.telegrambots.exceptions.TelegramApiRequestException;
+import org.telegram.telegrambots.meta.TelegramBotsApi;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
 public class Application {
 
@@ -16,12 +16,10 @@ public class Application {
     private static final Logger log = LoggerFactory.getLogger(Application.class);
 
     public static void main(String[] args) {
-        ApiContextInitializer.init();
-        final var telegramBotsApi = new TelegramBotsApi();
-
         try {
-            telegramBotsApi.registerBot(new AntiAlexBot());
-        } catch (TelegramApiRequestException e) {
+            final var telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
+            telegramBotsApi.registerBot(new AntiAlexBot(BOT_TOKEN));
+        } catch (TelegramApiException e) {
             log.error(e.getMessage());
         }
     }
